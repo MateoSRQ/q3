@@ -59,7 +59,7 @@ export default class Component extends React.Component<Props, State> {
                         </div>
                     </div>
                 </div>
-                <Split minSize={this.state.leftPaneWidth} maxSize={320} split="vertical" className={[style.body].join(' ')}>
+                <Split minSize={this.state.leftPaneWidth} maxSize={this.state.leftPaneWidth} split="vertical" className={[style.body].join(' ')}>
                     <div className={[style.left].join(' ')}>
                         <Menu />
                     </div>

@@ -8,13 +8,16 @@ import {menu} from 'react-icons-kit/feather/menu';
 import {ic_menu} from 'react-icons-kit/md/ic_menu';
 
 import Menu from '../../components/menu';
-import List from '../../components/list';
-import withDataProvider from '../../components/dataprovider';
-import Scrollable from 'react-custom-scrollbars';
+
+
+
+import Dynamic from '../dynamic';
+
 
 import './resizer.css';
-import Item from './item/index';
-let DataList = withDataProvider(List);
+
+
+
 
 interface State {
     leftPaneWidth: number
@@ -61,18 +64,7 @@ export default class Component extends React.Component<Props, State> {
                     <div className={[style.left].join(' ')}  style={{width: '320px'}}>
                         <Menu />
                     </div>
-                    <Split  size={320} minSize={50} maxSize={320}  className={[style.center].join(' ')}>
-                        <div className={[style.middle].join(' ')}>
-                            <Scrollable>
-                                <DataList
-                                    url='http://127.0.0.1:3333/api/nodos'
-                                    item={Item}
-                                    keyId='_id'
-                                />
-                            </Scrollable>
-                        </div>
-                        <div className={[style.right].join(' ')}></div>
-                    </Split>
+                    <Dynamic />
                 </Split>
             </div>
         );

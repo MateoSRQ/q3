@@ -1,10 +1,10 @@
-@value titleHeight: 40px;
+@value titleHeight: 50px;
 
 
 .component {
     width: 100%;
     height: 100%;
-    background-color:  #e8e8e8;
+    background-color:  #F3F2F1;
 }
 
 .title {
@@ -13,33 +13,56 @@
     position: absolute;
     left: 0;
     top: 0;
+    background-color: #003979;
+    display: flex;
+    justify-items: left;
+    justify-content: left;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .menuIcon {
     width: 50px;
-    height: 40px;
+    height: titleHeight;
     display: flex;
     justify-items: center;
     justify-content: center;
     align-content: center;
     align-items: center;
+    margin-right: 20px;
+}
+
+.logoContainer {
+    width: 100px;
+    height: titleHeight;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: .1px 0 0 currentColor;
 }
 
 .icon {
     width: 20px;
     height: 20px;
-    top: 7px;
+    top: 12px;
     position: absolute;
     margin-top: 0px;
+    color: #fff;
 }
 
 .body {
     width: 100%;
-    height: calc(100% - titleHeight);
+    height: calc(100% - titleHeight) !important;
     position: absolute;
     left: 0;
     top: titleHeight;
-    background-color: #0bff00;
+    background-color: #f9fcff !important;
 }
 
 .left {
@@ -57,7 +80,7 @@
 .middle {
     width: 100%;
     height: 100%;
-    background-color: #5a5fe8;
+    background-color: #ffffff;
 }
 
 

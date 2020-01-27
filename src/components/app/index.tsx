@@ -6,7 +6,7 @@ import Loader from '../loader'
 
 import Main from '../../pages/main';
 
-log.setLevel('info');
+log.setLevel('warn');
 
 interface Props {}
 export default class Component extends React.Component<Props> {
@@ -18,7 +18,7 @@ export default class Component extends React.Component<Props> {
         log.info('App:render reached');
         return (
             <div className={[style.component].join(' ')}>
-                <Loader size={64} auto={2000}>
+                <Loader size={96} auto={2000}>
                     <Main />
                 </Loader>
             </div>

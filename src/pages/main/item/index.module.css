@@ -1,0 +1,26 @@
+.component {
+  width: 100%;
+  min-height: 100px;
+  /* border: 1px solid black; */
+  border-bottom: 0.5px #e0dbdb solid;
+}
+
+.component * {
+  font-family: 'Arimo', sans-serif;
+  /* font-family: 'Noto Sans JP', sans-serif; */
+  /* font-family: 'Nunito Sans', sans-serif; */
+  /* font-family: 'Open Sans', sans-serif; */
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Rubik', sans-serif;
+  /* font-family: 'Sintony', sans-serif; */
+  /* font-family: 'Titillium Web', sans-serif; */
+  /* font-family: 'Source Sans Pro', sans-serif; */
+  /* font-family: 'Nunito', sans-serif; */
+  min-height: calc(100% + 10px);
+  font-weight: 400;
+  font-size: 13.5px !important;
+  letter-spacing: -0.75px;
+  color: #3e3e3e;
+  background-color: transparent !important;
+  /* text-shadow: .3px 0 0 currentColor; */
+}

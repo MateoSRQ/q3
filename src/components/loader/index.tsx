@@ -14,6 +14,8 @@ interface Props {
     children?: any,
     status: string,
     auto?: number,
+    spin?: any,
+
 }
 
 interface State {

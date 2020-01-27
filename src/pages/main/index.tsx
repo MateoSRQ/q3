@@ -8,8 +8,13 @@ import {menu} from 'react-icons-kit/feather/menu';
 import {ic_menu} from 'react-icons-kit/md/ic_menu';
 
 import Menu from '../../components/menu';
+import List from '../../components/list';
+import withDataProvider from '../../components/dataprovider';
+import Scrollable from 'react-custom-scrollbars';
 
 import './resizer.css';
+import Item from './item/index';
+let DataList = withDataProvider(List);
 
 interface State {
     leftPaneWidth: number
@@ -20,8 +25,6 @@ interface Props {
 
 interface Props {}
 export default class Component extends React.Component<Props, State> {
-
-
     constructor(props: Props) {
         log.info('Main:constructor reached');
         super(props);
@@ -40,12 +43,6 @@ export default class Component extends React.Component<Props, State> {
         else {
             this.setState({leftPaneWidth: 320});
         }
-
-    }
-
-    componentDidMount(): void {
-        log.info('Main:componentDidMount reached');
-
     }
 
     render() {
@@ -58,13 +55,22 @@ export default class Component extends React.Component<Props, State> {
                             <KitIcon size={'100%'} icon={ic_menu} onClick={this.handleMenuClick}/>
                         </div>
                     </div>
+                    <div className={[style.logoContainer].join(' ')}>NATCLAR</div>
                 </div>
                 <Split minSize={this.state.leftPaneWidth} maxSize={this.state.leftPaneWidth} split="vertical" className={[style.body].join(' ')}>
-                    <div className={[style.left].join(' ')}>
+                    <div className={[style.left].join(' ')}  style={{width: '320px'}}>
                         <Menu />
                     </div>
-                    <Split  minSize={50} maxSize={320}  className={[style.center].join(' ')}>
-                        <div className={[style.middle].join(' ')}></div>
+                    <Split  size={320} minSize={50} maxSize={320}  className={[style.center].join(' ')}>
+                        <div className={[style.middle].join(' ')}>
+                            <Scrollable>
+                                <DataList
+                                    url='http://127.0.0.1:3333/api/nodos'
+                                    item={Item}
+                                    keyId='_id'
+                                />
+                            </Scrollable>
+                        </div>
                         <div className={[style.right].join(' ')}></div>
                     </Split>
                 </Split>

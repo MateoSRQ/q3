@@ -59,6 +59,7 @@ export default class Component extends React.Component<Props, State> {
     modalOk(): void {
         log.info('Main:modalOk reached');
         console.log('ok')
+        console.log(this.state.data);
         //this.setState({modalVisible: false} );
     }
 
@@ -90,18 +91,21 @@ export default class Component extends React.Component<Props, State> {
                     </div>
                 </Split>
                 <Modal
-                    title="20px to Top"
+                    title="Title"
                     visible={this.state.modalVisible}
                     onOk={this.modalOk}
                     onCancel={this.modalCancel}
                 >
                     <Form
                         handleChange={this.handleChange}
+                        validators={{
+                            codigo: {presence: true, email: true}
+                        }}
                     >
                         <Input
                             name="codigo"
                             label="Código"
-                           // placeholder="Código..."
+                            // placeholder="Código..."
                             defaultValue="Código"
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             value={this.state.data.codigo}
@@ -109,7 +113,7 @@ export default class Component extends React.Component<Props, State> {
                         <Input
                             name="nombre"
                             label="Descripción"
-                            placeholder="Descripción..."
+                            // placeholder="Descripción..."
                             value={this.state.data.nombre}
                         />
                     </Form>

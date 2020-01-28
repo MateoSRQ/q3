@@ -2,9 +2,9 @@ import React from 'react';
 import style from './index.module.css'
 import log from 'loglevel';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import validate from 'validate.js';
 
 import 'antd/dist/antd.css';
-import {any} from "prop-types";
 
 //log.setDefaultLevel('info')
 
@@ -20,33 +20,34 @@ class NInput extends React.Component<InputProps, InputState> {
     constructor(props: InputProps) {
         log.info('Form.Input:constructor reached');
         super(props);
-        console.log('VALUES')
-        console.log(this.props.value)
     }
 
     render() {
         log.info('Form.Input:constructor reached');
-        let {name, label, ...props} = this.props;
+        let {name, label, validateStatus, ...props} = this.props;
         return (
             <Form.Item
                 label={label?label:null}
+                validateStatus={validateStatus}
             >
                 <Input
                     name={name}
                     {...props}
-                />,
+                />
             </Form.Item>
         )
     }
 }
 
 interface Props {
-    children: any,
+    children?: any,
     handleChange?: any,
-    handleSubmit?: any
+    handleSubmit?: any,
+    validators?: any
 }
 
 interface State {
+    validateStatus?: string
 }
 
 class NForm extends React.Component<Props, State> {
@@ -55,18 +56,29 @@ class NForm extends React.Component<Props, State> {
     constructor(props: Props) {
         log.info('Form:constructor reached');
         super(props);
-
-
         this.Input = Input;
-        this.state = {};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+    }
+
+    handleBlur(e: any): void {
+        log.info('Form:handleChange reached');
+        if (this.props.validators && this.props.validators[e.currentTarget.name]) {
+            let result = validate.single(e.currentTarget.value, this.props.validators[e.currentTarget.name]);
+
+            /*
+            this.props.handleChange({
+                index: e.currentTarget.name,
+                value: e.currentTarget.value,
+                result: result
+            })
+            */
+        }
     }
 
     handleChange(e: any): void {
-        console.log('xxx');
-        console.log(e.currentTarget.value);
-        console.log(e.currentTarget.name);
+        log.info('Form:handleChange reached');
         this.props.handleChange({
             index: e.currentTarget.name,
             value: e.currentTarget.value
@@ -96,14 +108,15 @@ class NForm extends React.Component<Props, State> {
 
     render() {
         log.debug('Form:render reached');
-
         let children = null;
         if (this.props.children) {
             children = (Array.isArray(this.props.children))?this.props.children:[this.props.children];
             children = children.map((child: any) => {
                 let elem = React.cloneElement(child, {
                     key: child.props.name,
-                    onChange: this.handleChange
+                    onChange: this.handleChange,
+                    onBlur: this.handleBlur,
+                    validations: this.props.validators[child.props.name]
                 })
                 return elem;
             })

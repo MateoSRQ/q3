@@ -7,6 +7,7 @@ import Item from "./item";
 import withDataProvider from "../../components/dataprovider";
 import List from "../../components/list";
 import Record from './record';
+import Form from '../../components/form';
 
 import { Modal, Button, Radio, Icon } from 'antd';
 
@@ -25,15 +26,36 @@ export default class Component extends React.Component<Props, State> {
         log.info('Main:constructor reached');
         super(props);
         this.newRecord = this.newRecord.bind(this);
+        this.modalOk = this.modalOk.bind(this);
+        this.modalCancel = this.modalCancel.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             modalVisible: false
         };
+    }
+
+    handleSubmit(e: any) {
+        console.log('----');
+        console.log(e);
     }
 
     newRecord(): void {
         log.info('Main:newRecord reached');
         console.log('newRecord')
         this.setState({modalVisible: true} );
+    }
+
+    modalOk(): void {
+        log.info('Main:modalOk reached');
+        console.log('ok')
+        this.handleSubmit(3)
+        //this.setState({modalVisible: false} );
+    }
+
+    modalCancel(): void {
+        log.info('Main:modalCancel reached');
+        console.log('cancel')
+        this.setState({modalVisible: false} );
     }
 
     render() {
@@ -59,11 +81,22 @@ export default class Component extends React.Component<Props, State> {
                 </Split>
                 <Modal
                     title="20px to Top"
-                    visible={true}
+                    visible={this.state.modalVisible}
+                    onOk={this.modalOk}
+                    onCancel={this.modalCancel}
                 >
-                    <p>some contents...</p>
-                    <p>some contents...</p>
-                    <p>some contents...</p>
+                    <Form.Form
+                        x="AAAA"
+                    >
+                        <Form.Input
+                            name="codigo"
+                            label="Código"
+                            placeholder="Código..."
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            rules={[{ required: true, message: 'Por favor, ingrese un código válido' }]}
+                        />
+                        <Form.Input name="nombre" label="Descripción" placeholder="Descripción..."/>
+                    </Form.Form>
                 </Modal>
             </React.Fragment>
 

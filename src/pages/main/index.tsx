@@ -8,16 +8,8 @@ import {menu} from 'react-icons-kit/feather/menu';
 import {ic_menu} from 'react-icons-kit/md/ic_menu';
 
 import Menu from '../../components/menu';
-
-
-
 import Dynamic from '../dynamic';
-
-
 import './resizer.css';
-
-
-
 
 interface State {
     leftPaneWidth: number

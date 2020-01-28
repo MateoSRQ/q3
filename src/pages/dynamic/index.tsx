@@ -7,7 +7,7 @@ import Item from "./item";
 import withDataProvider from "../../components/dataprovider";
 import List from "../../components/list";
 import Record from './record';
-import Form from '../../components/form';
+import {Form, Input} from '../../components/form';
 
 import { Modal, Button, Radio, Icon } from 'antd';
 
@@ -15,6 +15,7 @@ let DataList = withDataProvider(List);
 
 interface State {
     modalVisible: boolean
+    data: any,
 }
 
 interface Props {
@@ -28,15 +29,25 @@ export default class Component extends React.Component<Props, State> {
         this.newRecord = this.newRecord.bind(this);
         this.modalOk = this.modalOk.bind(this);
         this.modalCancel = this.modalCancel.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
-            modalVisible: false
+            modalVisible: false,
+            data: {
+                codigo: 'Codigo',
+                nombre: 'Nombre'
+            }
         };
     }
 
-    handleSubmit(e: any) {
+    handleChange(e: any) {
         console.log('----');
+        let data = this.state.data;
+        data[e.index] = e.value
+
         console.log(e);
+        this.setState({
+            data: data
+        })
     }
 
     newRecord(): void {
@@ -48,7 +59,6 @@ export default class Component extends React.Component<Props, State> {
     modalOk(): void {
         log.info('Main:modalOk reached');
         console.log('ok')
-        this.handleSubmit(3)
         //this.setState({modalVisible: false} );
     }
 
@@ -85,18 +95,24 @@ export default class Component extends React.Component<Props, State> {
                     onOk={this.modalOk}
                     onCancel={this.modalCancel}
                 >
-                    <Form.Form
-                        x="AAAA"
+                    <Form
+                        handleChange={this.handleChange}
                     >
-                        <Form.Input
+                        <Input
                             name="codigo"
                             label="Código"
-                            placeholder="Código..."
+                           // placeholder="Código..."
+                            defaultValue="Código"
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            rules={[{ required: true, message: 'Por favor, ingrese un código válido' }]}
+                            value={this.state.data.codigo}
                         />
-                        <Form.Input name="nombre" label="Descripción" placeholder="Descripción..."/>
-                    </Form.Form>
+                        <Input
+                            name="nombre"
+                            label="Descripción"
+                            placeholder="Descripción..."
+                            value={this.state.data.nombre}
+                        />
+                    </Form>
                 </Modal>
             </React.Fragment>
 

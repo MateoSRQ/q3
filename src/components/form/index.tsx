@@ -8,58 +8,69 @@ import {any} from "prop-types";
 
 //log.setDefaultLevel('info')
 
-interface _InputProps {
+interface InputProps {
     form?: any,
     name: string,
     placeholder?: string,
     [x: string]: any
 }
-interface _InputState {}
+interface InputState {}
 
-class _Input extends React.Component<_InputProps, _InputState> {
-    constructor(props: _InputProps) {
+class NInput extends React.Component<InputProps, InputState> {
+    constructor(props: InputProps) {
         log.info('Form.Input:constructor reached');
         super(props);
+        console.log('VALUES')
+        console.log(this.props.value)
     }
 
     render() {
         log.info('Form.Input:constructor reached');
-        const { getFieldDecorator } = this.props.form;
+        let {name, label, ...props} = this.props;
         return (
             <Form.Item
-                label={this.props.label?this.props.label:null}
+                label={label?label:null}
             >
-                {getFieldDecorator(this.props.name, {
-                    rules: this.props.rules?this.props.rules:'',
-                })(
-                    <Input
-                        prefix={this.props.prefix?this.props.prefix:null}
-                        placeholder={this.props.placeholder?this.props.placeholder:''}
-                    />,
-                )}
+                <Input
+                    name={name}
+                    {...props}
+                />,
             </Form.Item>
         )
     }
 }
 
 interface Props {
-    form: any,
     children: any,
-    x: any,
-    [x: string]: any
+    handleChange?: any,
+    handleSubmit?: any
 }
 
 interface State {
 }
 
-class _Component extends React.Component<Props, State> {
+class NForm extends React.Component<Props, State> {
+    Input: any
+
     constructor(props: Props) {
         log.info('Form:constructor reached');
         super(props);
+
+
+        this.Input = Input;
         this.state = {};
         this.handleSubmit = this.handleSubmit.bind(this);
-        console.log('FORM');
-        console.log(this.props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e: any): void {
+        console.log('xxx');
+        console.log(e.currentTarget.value);
+        console.log(e.currentTarget.name);
+        this.props.handleChange({
+            index: e.currentTarget.name,
+            value: e.currentTarget.value
+        })
     }
 
     componentDidMount(): void {
@@ -72,27 +83,27 @@ class _Component extends React.Component<Props, State> {
 
     handleSubmit(e: any)  {
         e.preventDefault();
-        this.props.form.validateFields((err:any, values:any) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
-        });
-        if (this.props.handleSubmit) {
-            this.props.handleSubmit(e);
-        }
+        this.props.handleSubmit(e);
+        // this.props.form.validateFields((err:any, values:any) => {
+        //     if (!err) {
+        //         console.log('Received values of form: ', values);
+        //     }
+        // });
+        // if (this.props.handleSubmit) {
+        //     this.props.handleSubmit(e);
+        // }
     };
 
     render() {
         log.debug('Form:render reached');
-        const { getFieldDecorator } = this.props.form;
 
         let children = null;
         if (this.props.children) {
             children = (Array.isArray(this.props.children))?this.props.children:[this.props.children];
             children = children.map((child: any) => {
                 let elem = React.cloneElement(child, {
-                    form: this.props.form,
-                    key: child.props.name
+                    key: child.props.name,
+                    onChange: this.handleChange
                 })
                 return elem;
             })
@@ -105,16 +116,6 @@ class _Component extends React.Component<Props, State> {
             </div>
         );
     }
-
 }
 
-const DerivedComponent = Form.create({
-    name: 'form'
-})(_Component);
-
-const Component = {
-    Form: DerivedComponent,
-    Input: _Input
-};
-
-export default Component;
+export {NInput as Input, NForm as Form };

@@ -2,9 +2,7 @@ import React from 'react';
 import style from './index.module.css'
 import log from 'loglevel';
 
-import { Tabs} from 'antd';
-const { TabPane } = Tabs;
-
+import Table from '../../../components/table';
 
 interface Props {
 }
@@ -28,7 +26,7 @@ export default class Component extends React.Component<Props> {
         log.info('Record:render reached');
         return (
             <div className={[style.component].join(' ')} onClick={() => { this.handleClick('1')}}>
-                ITEM
+               <Table />
             </div>
         );
     }

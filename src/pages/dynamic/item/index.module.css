@@ -1,11 +1,9 @@
 .component {
-  width: 100%;
+  width: calc(100% - 30px);
+  margin-left: 14px;
   min-height: 100px;
   /* border: 1px solid black; */
   border-bottom: 0.5px #e0dbdb solid;
-}
-
-.component * {
   font-family: 'Arimo', sans-serif;
   /* font-family: 'Noto Sans JP', sans-serif; */
   /* font-family: 'Nunito Sans', sans-serif; */
@@ -16,11 +14,11 @@
   /* font-family: 'Titillium Web', sans-serif; */
   /* font-family: 'Source Sans Pro', sans-serif; */
   /* font-family: 'Nunito', sans-serif; */
-  min-height: calc(100% + 10px);
   font-weight: 400;
   font-size: 13.5px !important;
   letter-spacing: -0.75px;
-  color: #3e3e3e;
+  color: #292d26;
   background-color: transparent !important;
   /* text-shadow: .3px 0 0 currentColor; */
 }
+

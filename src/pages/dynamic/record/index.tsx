@@ -10,6 +10,7 @@ interface Props {
 
 interface State {
     data: any,
+    columns: any
 }
 
 export default class Component extends React.Component<Props, State> {
@@ -18,15 +19,46 @@ export default class Component extends React.Component<Props, State> {
         log.info('Record:constructor reached');
         this.handleClick = this.handleClick.bind(this);
         this.state = {
-            data: null
+            data: null,
+            columns: null
         }
     }
 
     async componentDidMount(): Promise<any> {
-        let results = await axios.get('http://127.0.0.1:3333/api/fullNodos');
-        console.log(results);
+        let nodos = await axios.get('http://127.0.0.1:3333/api/fullNodos');
+        let examenes = await axios.get('http://127.0.0.1:3333/api/examenes');
+
+        let _examenes = [
+            {
+                title: 'ID',
+                dataIndex: 'id',
+                key: 'id',
+                width: 500
+            },
+            {
+                title: 'sede_id',
+                dataIndex: 'sede_id',
+                key: 'sede_id',
+                width: 500
+            },
+            {
+                title: 'Nombre',
+                dataIndex: 'nombre',
+                key: 'nombre',
+                width: 500
+            },
+        ];
+        for (let examen of examenes.data) {
+            _examenes.push({
+                title: examen.codigo,
+                dataIndex: examen.codigo,
+                key: examen.codigo,
+                width: 100
+            })
+        }
         this.setState({
-            data: results.data
+            data: nodos.data,
+            columns: _examenes
         });
     }
 
@@ -39,7 +71,10 @@ export default class Component extends React.Component<Props, State> {
         log.info('Record:render reached');
         return (
             <div className={[style.component].join(' ')} onClick={() => { this.handleClick('1')}}>
-               <Table data={this.state.data}/>
+               <Table
+                   data={this.state.data}
+                   columns={this.state.columns}
+               />
             </div>
         );
     }

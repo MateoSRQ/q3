@@ -11,10 +11,10 @@
     font-family: 'Poppins', sans-serif;
     font-family: 'Work Sans', sans-serif;
     min-height: calc(100% + 10px);
-    font-weight: 400;
-    font-size: 13.5px!important;
+    font-weight: 500;
+    font-size: 12.5px!important;
     letter-spacing: -0.25px;
-    color: #504e4e;
+    color: #1b1a1a;
     background-color: transparent !important;
     /* text-shadow: .1px 0 0 currentColor; */
 }

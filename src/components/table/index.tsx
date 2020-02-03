@@ -4,20 +4,15 @@ import log from 'loglevel';
 
 import { Table } from 'antd';
 
-//_id":"5df1326e1c866084207e5e4e","id":100,"sede_id":1,"nombre":"OPTOMETRIA","user_id":null,"paciente_id":null,"area":"65","color":"CB333B","codigo":"OPTOMETRIA_65B","tiempo_atencion":55,"tiempo_llamada":14,"tiempo_espera":2
-
-
-
 interface State {
     loaded: boolean
 }
 
 interface Props {
     data: any,
-    columns: any
+    columns: any,
+    y: number
 }
-
-
 
 export default class Component extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -47,12 +42,17 @@ export default class Component extends React.Component<Props, State> {
                 <Table
                     dataSource={this.props.data}
                     columns={this.props.columns}
-                    childrenColumnName='nodos'
-                    scroll={{ x: 1500, y: 500 }}/>
+                    //childrenColumnName='examenes'
+                    scroll={{ x: 1500, y: this.props.y }}
+                    rowKey='_id'
+                    // pagination={false}
+                />
+
             )
         }
+        let {data, columns, ...props} = this.props
         return (
-            <div className={[style.component].join(' ')} {...this.props}>
+            <div className={[style.component].join(' ')} {...props}>
                 {table}
             </div>
         );

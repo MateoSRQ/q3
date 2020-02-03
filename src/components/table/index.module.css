@@ -12,10 +12,50 @@
     font-family: 'Work Sans', sans-serif;
     min-height: calc(100% + 10px);
     font-weight: 500;
-    font-size: 12.5px!important;
+    /*font-size: 12.5px!important;*/
     letter-spacing: -0.25px;
     color: #1b1a1a;
-    background-color: transparent !important;
+    /*background-color: transparent !important;*/
     /* text-shadow: .1px 0 0 currentColor; */
 }
 
+
+.component ::-webkit-scrollbar {
+    width: 6px;
+    opacity: 0.7;
+}
+
+.component ::-webkit-scrollbar-track {
+    background-color: #d4d4d4;
+    width: 10px;
+    border-radius: 10px;
+    opacity: 0.7;
+}
+
+.component ::-webkit-scrollbar-thumb {
+    width: 4px;
+    border-radius: 10px;
+    background-color: #72766e;
+    opacity: 0.7;
+}
+
+.component ::-webkit-scrollbar:horizontal {
+    height: 6px;
+    opacity: 0.7;
+}
+
+.component ::-webkit-scrollbar-track:horizontal {
+    background-color: #d4d4d4;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.component ::-webkit-scrollbar-thumb:horizontal {
+    height: 4px;
+    border-radius: 10px;
+    background-color: #72766e;
+}
+
+.component :global(.ant-table-header.ant-table-hide-scrollbar) {
+    overflow: hidden !important;
+}

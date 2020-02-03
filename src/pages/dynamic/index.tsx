@@ -40,7 +40,6 @@ export default class Component extends React.Component<Props, State> {
     }
 
     handleChange(e: any) {
-        console.log('----');
         let data = this.state.data;
         data[e.index] = e.value
 
@@ -52,20 +51,17 @@ export default class Component extends React.Component<Props, State> {
 
     newRecord(): void {
         log.info('Main:newRecord reached');
-        console.log('newRecord')
         this.setState({modalVisible: true} );
     }
 
     modalOk(): void {
         log.info('Main:modalOk reached');
-        console.log('ok')
         console.log(this.state.data);
         //this.setState({modalVisible: false} );
     }
 
     modalCancel(): void {
         log.info('Main:modalCancel reached');
-        console.log('cancel')
         this.setState({modalVisible: false} );
     }
 
@@ -75,16 +71,16 @@ export default class Component extends React.Component<Props, State> {
             <React.Fragment>
                 <Split  size={320} minSize={50} maxSize={320}  className={[style.center].join(' ')}>
                     <div className={[style.middle].join(' ')}>
-                        <div className={[style.middleHeader].join(' ')}>
-                            <Button type="primary" style={{width: '200px'}} onClick={this.newRecord}>Nuevo registro</Button>
-                        </div>
-                        <Scrollable className={[style.middleBody].join(' ')}>
-                            <DataList
-                                url='http://127.0.0.1:3333/api/nodos'
-                                item={Item}
-                                keyId='_id'
-                            />
-                        </Scrollable>
+                        {/*<div className={[style.middleHeader].join(' ')}>*/}
+                        {/*    <Button type="primary" style={{width: '200px'}} onClick={this.newRecord}>Nuevo registro</Button>*/}
+                        {/*</div>*/}
+                        {/*<Scrollable className={[style.middleBody].join(' ')}>*/}
+                        {/*    <DataList*/}
+                        {/*        url='http://127.0.0.1:3333/api/nodos'*/}
+                        {/*        item={Item}*/}
+                        {/*        keyId='_id'*/}
+                        {/*    />*/}
+                        {/*</Scrollable>*/}
                     </div>
                     <div className={[style.right].join(' ')}>
                         <Record />

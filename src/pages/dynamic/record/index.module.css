@@ -5,7 +5,7 @@
   left: 10px;
   top: 10px;
   /* border: 1px solid black; */
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
 }
 
 .component * {
@@ -15,11 +15,41 @@
   font-family: 'Open Sans', sans-serif;
   font-family: 'Poppins', sans-serif;
   /* font-family: 'Work Sans', sans-serif; */
-  min-height: calc(100% + 10px);
   font-weight: 400;
-  font-size: 12.5px!important;
+  /*font-size: 12.5px!important;*/
   letter-spacing: 0.45px;
   color: #1b1a1a;
-  background-color: transparent !important;
+  /*background-color: transparent;*/
 /* text-shadow: .1px 0 0 currentColor; */
+}
+
+.okCell {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff !important;
+  cursor: pointer;
+  outline: 2px solid white;
+  text-align: center;
+  color: white !important;
+
+}
+
+.nokCell {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff !important;
+  cursor: pointer;
+  outline: 2px solid white;
+  text-align: center;
+  color: white !important;
+}
+
+.tableContainer {
+  width: calc(100% - 10px);
+  height: calc(100% - 110px);
+  position: absolute;
+  left: 5px;
+  top: 100px;
+  border: 1px solid pink;
+  background-color: pink;
 }

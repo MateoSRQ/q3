@@ -13,7 +13,7 @@
     "antd": "^3.26.7",
     "axios": "^0.19.2",
     "jsonpack": "^1.1.5",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "loglevel": "^1.6.6",
     "msgpack-lite": "^0.1.26",
     "rc-animate": "^2.10.2",
